@@ -2,13 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as fromWeb;
-Map<String,dynamic> dataList = {
-  "name": "",
+Map<String,dynamic> dataList = { "name": "",
   "gender": "",
   "email": "",
   "image": "",
-  "age": 0,
-};
+  "age": 0,};
 
 class RandomUserInfo extends StatefulWidget {
   const RandomUserInfo({Key? key}) : super(key: key);
@@ -85,7 +83,11 @@ Future<Map<String,dynamic>> fetchData() async{
    // print(decodedJson.toString());
 
     BaseBlock check = BaseBlock.dividePortion(decodedJson);
+    print(check.personalInfo.toString());
     dataList = check.personalInfo;
+
+    print(dataList.toString());
+
     return dataList;
   } else {
     throw ("Didn't received any data!");
@@ -94,13 +96,7 @@ Future<Map<String,dynamic>> fetchData() async{
 
 
 class BaseBlock{
-  Map<String,dynamic> personalInfo = {
-    "name": "",
-    "gender": "",
-    "email": "",
-    "image": "",
-    "age": 0,
-  };
+   Map<String,dynamic> personalInfo = {};
 
   BaseBlock({required personalInfo});
 
@@ -129,7 +125,7 @@ class BaseBlock{
     personalData.update("image", (value) => image);
 
     print(personalData.toString());
-    return BaseBlock(personalInfo: personalInfo);
+    return BaseBlock(personalInfo: personalData);
   }
 
 }
